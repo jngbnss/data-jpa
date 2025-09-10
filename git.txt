@@ -8,8 +8,10 @@ git push -u origin main
 git pull origin main
 
 git add .
-git commit -m "메시지 작성"
+git commit -m "09/10 10:03 예제 도메인까지 타이핑 완료"
 git push
 
+jdbc:h2:tcp://localhost/~/datajpa
 
+09/10 10:03 예제 도메인까지 타이핑 완료
 
