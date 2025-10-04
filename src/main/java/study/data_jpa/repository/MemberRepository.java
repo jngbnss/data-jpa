@@ -13,21 +13,29 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member,Long> {
     // 이름과 나이를 기준으로 회원을 조회하려면
+    // 길어지면 답이 없음
     List<Member> findByUsernameAndAgeGreaterThan(String username,int age);
 
     //JPA를 직접 사용해서 Named 쿼리 호출
+    // 이거 안씀
     //@Query(name = "Member.findByUsername") // 쿼리 생략가능
     //List<Member>findByUsername(@Param("username")String username);
 
     //List<Member> findByUsername(@Param("username") String username);
 
-    //메서드에 JPQL 쿼리 작성
+    //메서드에 JPQL 쿼리 작성 //실무에서 많이 씀
+    // 오타를 치면 컴파일 오류
     @Query("select m from Member m where m.username= :username and m.age = :age")
     List<Member> findUser(@Param("username") String username, @Param("age") int
             age);
 
     //@Query 값 DTO 조회하기
-    @Query("select new study.datajpa.dto.MemberDto(m.id, m.username, t.name) " +
+
+    @Query("select m.username from Member m")
+    List<String> findUsernameList();
+
+
+    @Query("select new study.data_jpa.dto.MemberDto(m.id, m.username, t.name) " +
             "from Member m join m.team t")
     List<MemberDto> findMemberDto();
 
